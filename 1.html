@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<style>
+	* {
+		
+		margin:0;padding:0;
+		font-family:Tahoma;
+	}
+	
+	.animation-text {
+		width:400px;
+		text-align:center;
+		font-size:88px;
+		margin-top: 24px;
+		color:white;
+		text-shadow:2px 2px 2px black;
+	}
+	#word3 {
+		text-shadow:2px 2px 2px red;
+	}
+	.start_animation {
+		animation-name: start_animation;
+		animation-duration: 2s;
+		animation-iteration-count: 1;
+		display:inline-block;
+	}
+	
+	@keyframes start_animation {
+	 0% {display:none;}
+	  1%   {display:inline-block;transform: scale(11);}
+	  25%  {transform: scale(1);}
+	  50% {display:none;}
+	}
+	body {
+		padding-top:44px;
+	}
+	body>div {
+		display:none;
+	}
+	#jail {
+		position:absolute;
+		left:400px;
+		top:44px;
+		display:none;
+		margin:2px;
+	}
+	</style>
+	</head>
+	<body>
+
+	<div class="animation-text" id="word1">
+		PUTIN
+	</div>
+	<div class="animation-text" id="word2">
+		IS
+	</div>
+	<div class="animation-text" id="word3">
+		CRIMINAL
+	</div>
+
+	<img src="putin.jpg" style="margin-left:46px;display:none;border: 2px solid #747474;" id="putin-image">
+	<img src="jail.png" id="jail">
+	
+	<script>
+	
+	let delay_speed = 1200;
+	
+	$(function(){
+	
+		startAnimation();
+		
+		setInterval(function(){
+			startAnimation();
+		},delay_speed*8)
+	
+	})
+	
+	
+	function startAnimation() {
+		$("#putin-image").hide();
+		$("#jail").hide()
+		$("#jail").animate({"left":400},700);
+		
+		$("#word1").addClass("start_animation");
+		
+		setTimeout(function(){
+			$("#word1").removeClass("start_animation");
+			$("#word2").addClass("start_animation");
+		},delay_speed)
+	
+		setTimeout(function(){
+			$("#word2").removeClass("start_animation");
+			$("#word3").addClass("start_animation");
+		},delay_speed*2)
+		
+		setTimeout(function(){
+		$("#word3").removeClass("start_animation");
+		$("#putin-image").fadeIn(700);
+		},delay_speed*4)
+		
+		setTimeout(function(){
+		$("#jail").show().animate({"left":46},700);
+		},delay_speed*5)
+	}
+	</script>
+	</body>
+</html>
